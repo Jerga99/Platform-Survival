@@ -6,8 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
 
+    private Rigidbody m_Rb;
+
+    private void Awake()
+    {
+        m_Rb = GetComponent<Rigidbody>();
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -16,6 +23,6 @@ public class PlayerController : MonoBehaviour
 
         movement.Normalize();
 
-        transform.Translate(movement * speed * Time.deltaTime);
+        m_Rb.MovePosition(m_Rb.position + movement * speed * Time.deltaTime);
     }
 }
