@@ -25,4 +25,9 @@ public class PlayerController : MonoBehaviour
 
         m_Rb.MovePosition(m_Rb.position + movement * speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("On Trigger Enter!");
+    }
 }
