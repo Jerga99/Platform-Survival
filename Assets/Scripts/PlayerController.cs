@@ -30,7 +30,15 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Elevator"))
         {
-            Debug.Log("It's Elevator!");
+            transform.parent = other.transform.parent;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Elevator"))
+        {
+            transform.parent = null;
         }
     }
 }
