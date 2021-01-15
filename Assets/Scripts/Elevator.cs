@@ -20,7 +20,7 @@ public class Elevator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
        
         if (m_TravelDistance >= m_MaxTravelDistance)
@@ -31,7 +31,7 @@ public class Elevator : MonoBehaviour
             }
         } else
         {
-            float distanceStep = m_Speed * Time.deltaTime;
+            float distanceStep = m_Speed * Time.fixedDeltaTime;
             m_TravelDistance += Mathf.Abs(distanceStep);
             transform.Translate(0, distanceStep, 0);
         }

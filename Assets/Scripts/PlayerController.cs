@@ -23,11 +23,14 @@ public class PlayerController : MonoBehaviour
 
         movement.Normalize();
 
-        m_Rb.MovePosition(m_Rb.position + movement * speed * Time.deltaTime);
+        m_Rb.MovePosition(m_Rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("On Trigger Enter!");
+        if (other.CompareTag("Elevator"))
+        {
+            Debug.Log("It's Elevator!");
+        }
     }
 }
