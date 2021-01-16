@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     private Rigidbody m_Rb;
+    private GameObject m_Elevator;
+    private float m_ElevatorOffsetY;
 
     private void Awake()
     {
@@ -30,7 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Elevator"))
         {
-            transform.parent = other.transform.parent;
+            m_Elevator = other.gameObject;
+            m_ElevatorOffsetY = transform.position.y - m_Elevator.transform.position.y;
         }
     }
 
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Elevator"))
         {
-            transform.parent = null;
+
         }
     }
 }
