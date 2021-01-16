@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         m_Rb = GetComponent<Rigidbody>();
+        m_ElevatorOffsetY = 0;
     }
 
     // Update is called once per frame
@@ -21,11 +22,17 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
+        Vector3 playerPos = m_Rb.position;
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
 
         movement.Normalize();
 
-        m_Rb.MovePosition(m_Rb.position + movement * speed * Time.fixedDeltaTime);
+        if (m_Elevator != null)
+        {
+            playerPos.y = m_Elevator.transform.position.y + m_ElevatorOffsetY;
+        }
+
+        m_Rb.MovePosition(playerPos + movement * speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Elevator"))
         {
-
+            m_Elevator = null;
+            m_ElevatorOffsetY = 0;
         }
     }
 }
