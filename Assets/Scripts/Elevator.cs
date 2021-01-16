@@ -11,9 +11,11 @@ public class Elevator : MonoBehaviour
     private float m_Speed = 5.0f;
 
     private Coroutine m_ReverseCoroutine;
+    private Rigidbody m_Rb;
 
     private IEnumerator Start()
     {
+        m_Rb = GetComponent<Rigidbody>();
         enabled = false;
         yield return new WaitForSeconds(3.0f);
         enabled = true;
@@ -33,7 +35,11 @@ public class Elevator : MonoBehaviour
         {
             float distanceStep = m_Speed * Time.fixedDeltaTime;
             m_TravelDistance += Mathf.Abs(distanceStep);
-            transform.Translate(0, distanceStep, 0);
+
+            Vector3 elevatorPos = m_Rb.position;
+            elevatorPos.y += distanceStep;
+
+            m_Rb.MovePosition(elevatorPos);
         }
     }
 
