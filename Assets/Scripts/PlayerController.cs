@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
             playerPos.y = m_Elevator.transform.position.y + m_ElevatorOffsetY;
         }
 
+        targetRotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            360 * Time.fixedDeltaTime);
+
         m_Rb.MovePosition(playerPos + movement * speed * Time.fixedDeltaTime);
         m_Rb.MoveRotation(targetRotation);
     }
