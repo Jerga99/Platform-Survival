@@ -24,8 +24,7 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 moveTowards = (m_FollowTarget.transform.position - transform.position).normalized;
-
+        moveTowards.y = 0;
         m_Rb.AddForce(moveTowards * speed);
-        
     }
 }
