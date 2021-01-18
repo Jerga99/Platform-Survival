@@ -29,18 +29,16 @@ public class PlayerController : MonoBehaviour
         Vector3 playerPos = m_Rb.position;
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-        Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, movement);
+        if (movement == Vector3.zero)
+        {
+            return;
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(movement);
         
         if (m_Elevator != null)
         {
             playerPos.y = m_Elevator.transform.position.y + m_ElevatorOffsetY;
-        }
-
-        // To check if we are going backwards
-        if (Mathf.Approximately(Vector3.Dot(movement, Vector3.forward), -1.0f)) {
-
-            // look rotation on Y AXIS so target will rotate into the direction 
-            targetRotation = Quaternion.LookRotation(-Vector3.forward);
         }
 
         targetRotation = Quaternion.RotateTowards(
