@@ -7,10 +7,22 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab;
     public Vector2 spawnRange;
 
+    private int m_EnemyCount;
+
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemy();   
+    }
+
+    private void Update()
+    {
+        m_EnemyCount = FindObjectsOfType<EnemyController>().Length;
+
+        if (m_EnemyCount == 0)
+        {
+            SpawnEnemy();
+        }
     }
 
     private void SpawnEnemy()

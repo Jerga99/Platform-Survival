@@ -26,5 +26,10 @@ public class EnemyController : MonoBehaviour
         Vector3 moveTowards = (m_FollowTarget.transform.position - transform.position).normalized;
         moveTowards.y = 0;
         m_Rb.AddForce(moveTowards * speed);
+
+        if (transform.position.y <= -15.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
