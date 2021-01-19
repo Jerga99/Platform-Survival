@@ -65,11 +65,18 @@ public class PlayerController : MonoBehaviour
             m_SpeedModifier = 2;
             StartCoroutine(BonusSpeedCountdown());
         }
+
+        if (collision.gameObject.CompareTag("Enemy") && m_SpeedModifier > 1)
+        {
+            Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = collision.transform.position - transform.position;
+            enemyRb.AddForce(awayFromPlayer * 20.0f, ForceMode.Impulse);
+        }
     }
 
     private IEnumerator BonusSpeedCountdown()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(20.0f);
         m_SpeedModifier = 1;
     }
 
