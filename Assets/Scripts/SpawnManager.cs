@@ -14,18 +14,18 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         m_waves = 1;
-        //SpawnEnemy();   
+        SpawnEnemy();
     }
 
     private void Update()
     {
         m_EnemyCount = FindObjectsOfType<EnemyController>().Length;
 
-        //if (m_EnemyCount == 0)
-        //{
-        //    m_waves++;
-        //    SpawnEnemy();
-        //}
+        if (m_EnemyCount == 0)
+        {
+            m_waves++;
+            SpawnEnemy();
+        }
     }
 
     private void SpawnEnemy()

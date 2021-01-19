@@ -63,7 +63,14 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             m_SpeedModifier = 2;
+            StartCoroutine(BonusSpeedCountdown());
         }
+    }
+
+    private IEnumerator BonusSpeedCountdown()
+    {
+        yield return new WaitForSeconds(3.0f);
+        m_SpeedModifier = 1;
     }
 
     private void OnTriggerEnter(Collider other)
