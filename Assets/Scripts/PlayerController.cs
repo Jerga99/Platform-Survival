@@ -15,6 +15,15 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        GameObject go = new GameObject {
+            name = "Circle"
+        };
+        Vector3 circlePosition = Vector3.zero;
+
+        go.transform.parent = transform;
+        go.transform.localPosition = circlePosition;
+
+
         m_Rb = GetComponent<Rigidbody>();
         m_ElevatorOffsetY = 0;
         m_SpeedModifier = 1;
