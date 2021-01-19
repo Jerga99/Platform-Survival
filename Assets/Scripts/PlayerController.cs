@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     private GameObject m_Elevator;
     private float m_ElevatorOffsetY;
     private Vector3 m_CameraPos;
+    private float m_SpeedModifier;
 
     private void Awake()
     {
         m_Rb = GetComponent<Rigidbody>();
         m_ElevatorOffsetY = 0;
+        m_SpeedModifier = 1;
 
         m_CameraPos = followCamera.transform.position - m_Rb.position;
     }
@@ -46,13 +48,22 @@ public class PlayerController : MonoBehaviour
             targetRotation,
             360 * Time.fixedDeltaTime);
 
-        m_Rb.MovePosition(playerPos + movement * speed * Time.fixedDeltaTime);
+        m_Rb.MovePosition(playerPos + movement * m_SpeedModifier * speed * Time.fixedDeltaTime);
         m_Rb.MoveRotation(targetRotation);
     }
 
     private void LateUpdate()
     {
         followCamera.transform.position = m_Rb.position + m_CameraPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(collision.gameObject);
+            m_SpeedModifier = 2;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
