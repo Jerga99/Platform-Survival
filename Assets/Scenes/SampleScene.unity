@@ -1097,6 +1097,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -12.05
       objectReference: {fileID: 0}
+    - target: {fileID: 4659672149641681685, guid: 2ce451bc6885e42a8a9b1ac7f8682d55, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4659672149641681686, guid: 2ce451bc6885e42a8a9b1ac7f8682d55, type: 3}
       propertyPath: m_Name
       value: Powerup
