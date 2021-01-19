@@ -2,6 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public static class GameObjectEfx
+{
+    public static void DrawCircle(this GameObject container)
+    {
+        var lineRenderer = container.AddComponent<LineRenderer>();
+
+        Vector3 pointA = new Vector3(0, 0, 0);
+        Vector3 pointB = new Vector3(20, 0, 0);
+
+        var points = new Vector3[2];
+        points[0] = pointA;
+        points[1] = pointB;
+        lineRenderer.SetPositions(points);
+    }
+}
+
+
+
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -23,8 +42,10 @@ public class PlayerController : MonoBehaviour
         go.transform.parent = transform;
         go.transform.localPosition = circlePosition;
 
+        go.DrawCircle();
 
         m_Rb = GetComponent<Rigidbody>();
+        
         m_ElevatorOffsetY = 0;
         m_SpeedModifier = 1;
 
