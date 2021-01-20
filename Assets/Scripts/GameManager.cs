@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_SpawnManager = FindObjectOfType<SpawnManager>();
+        var elevators = FindObjectsOfType<Elevator>();
+
+        for (int i = 0; i < elevators.Length; i++)
+        {
+            OnGameStart.AddListener(elevators[i].OnGameStart);
+        }
     }
 
     public void RestartGame()

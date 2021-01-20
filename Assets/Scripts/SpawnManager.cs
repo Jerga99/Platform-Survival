@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject powerupPrefab;
     public Vector2 spawnRange;
 
     private int m_EnemyCount;
@@ -24,6 +25,7 @@ public class SpawnManager : MonoBehaviour
         {
             m_waves++;
             SpawnEnemy();
+            SpawnPowerup();
         }
     }
 
@@ -31,18 +33,29 @@ public class SpawnManager : MonoBehaviour
     {
         enabled = true;
         SpawnEnemy();
+        SpawnPowerup();
+    }
+
+    private void SpawnPowerup()
+    {
+        SpawnEntity(powerupPrefab);
     }
 
     private void SpawnEnemy()
     {
         for (var i = 0; i < m_waves; i++)
         {
-            Vector3 spawnPosition = new Vector3(
-                Random.Range(spawnRange[0], spawnRange[1]),
-                enemyPrefab.transform.position.y,
-                Random.Range(spawnRange[0], spawnRange[1]));
-
-            Instantiate(enemyPrefab, spawnPosition, enemyPrefab.transform.rotation);
+            SpawnEntity(enemyPrefab);
         }
+    }
+
+    private void SpawnEntity(GameObject entity)
+    {
+        Vector3 spawnPosition = new Vector3(
+            Random.Range(spawnRange[0], spawnRange[1]),
+            enemyPrefab.transform.position.y,
+            Random.Range(spawnRange[0], spawnRange[1]));
+
+        Instantiate(entity, spawnPosition, entity.transform.rotation);
     }
 }
