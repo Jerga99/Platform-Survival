@@ -10,11 +10,10 @@ public class SpawnManager : MonoBehaviour
     private int m_EnemyCount;
     private int m_waves;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         m_waves = 1;
-        SpawnEnemy();
+        enabled = false;
     }
 
     private void Update()
@@ -26,6 +25,12 @@ public class SpawnManager : MonoBehaviour
             m_waves++;
             SpawnEnemy();
         }
+    }
+
+    public void StartSpawning()
+    {
+        enabled = true;
+        SpawnEnemy();
     }
 
     private void SpawnEnemy()
