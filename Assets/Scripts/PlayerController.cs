@@ -3,32 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public static class GameObjectEfx
-{
-    public static void DrawCircle(this GameObject container, float radius, float lineWidth)
-    {
-        var segments = 360;
-        var lineRenderer = container.AddComponent<LineRenderer>();
-
-        lineRenderer.useWorldSpace = false;
-        lineRenderer.startWidth = lineWidth;
-        lineRenderer.endWidth = lineWidth;
-        lineRenderer.positionCount = segments + 1;
-
-        var points = new Vector3[lineRenderer.positionCount];
-
-        for (int i = 0; i < points.Length; i++)
-        {
-            var rad = Mathf.Deg2Rad * i;
-            points[i] = new Vector3(Mathf.Cos(rad) * radius, 0, Mathf.Sin(rad) * radius);
-        }
-
-        lineRenderer.SetPositions(points);
-    }
-}
-
-
-
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -42,16 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        GameObject go = new GameObject {
-            name = "Circle"
-        };
-        Vector3 circlePosition = Vector3.zero;
-
-        go.transform.parent = transform;
-        go.transform.localPosition = circlePosition;
-
-        go.DrawCircle(2.0f, .02f);
-
         m_Rb = GetComponent<Rigidbody>();
         
         m_ElevatorOffsetY = 0;

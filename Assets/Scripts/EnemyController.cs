@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float speed;
+    public float pushRadius;
 
     private Rigidbody m_Rb;
     private GameObject m_FollowTarget;
 
     private void Awake()
     {
+        AddCircle();
         m_Rb = GetComponent<Rigidbody>();
     }
 
@@ -31,5 +33,20 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void AddCircle()
+    {
+        GameObject go = new GameObject
+        {
+            name = "Circle"
+        };
+        Vector3 circlePosition = Vector3.zero;
+        circlePosition.y = -0.49f;
+
+        go.transform.parent = transform;
+        go.transform.localPosition = circlePosition;
+
+        go.DrawCircle(pushRadius, .02f);
     }
 }
