@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject startScreen;
+    public UnityEvent OnGameStart;
 
     private SpawnManager m_SpawnManager;
 
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        OnGameStart.Invoke();
         m_SpawnManager.StartSpawning();
         startScreen.SetActive(false);
     }
