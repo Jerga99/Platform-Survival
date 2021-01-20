@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool m_IsGameActive = false;
+    public GameObject startScreen;
+
     private SpawnManager m_SpawnManager;
 
     // Start is called before the first frame update
@@ -13,9 +15,14 @@ public class GameManager : MonoBehaviour
         m_SpawnManager = FindObjectOfType<SpawnManager>();
     }
 
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void StartGame()
     {
-        m_IsGameActive = true;
         m_SpawnManager.StartSpawning();
+        startScreen.SetActive(false);
     }
 }
